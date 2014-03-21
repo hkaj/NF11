@@ -1,10 +1,11 @@
-package logoparsing;
+package logoparsing.grammar;
+
+import logogui.Traceur;
+import logoparsing.grammar.LogoParser.AvContext;
+import logoparsing.grammar.LogoParser.TdContext;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
-import logogui.Traceur;
-import logoparsing.LogoParser.AvContext;
-import logoparsing.LogoParser.TdContext;
 
 public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	Traceur traceur;

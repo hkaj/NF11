@@ -1,11 +1,10 @@
 package logomain;
 
-import logogui.LogoFrame;
-import logoparsing.LogoLexer;
-import logoparsing.LogoParser;
-import logoparsing.LogoTreeVisitor;
-
 import java.io.IOException;
+
+import logogui.LogoFrame;
+import logoparsing.grammar.LogoLexer;
+import logoparsing.grammar.LogoParser;
 
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.ANTLRInputStream;

@@ -19,10 +19,9 @@ import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import logoparsing.LogoLexer;
-import logoparsing.LogoParser;
-import logoparsing.LogoParser.ProgrammeContext;
-import logoparsing.LogoTreeVisitor;
+import logoparsing.grammar.LogoLexer;
+import logoparsing.grammar.LogoParser;
+import logoparsing.grammar.LogoParser.ProgrammeContext;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -234,7 +233,7 @@ public class LogoFrame extends JFrame {
 		if (jRunButton == null) {
 			jRunButton = new JButton();
 			jRunButton.setName("run");
-			jRunButton.setText("Exécute ...");
+			jRunButton.setText("Exï¿½cute ...");
 			jRunButton.setPreferredSize(buttonDimension);
 			jRunButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -415,7 +414,7 @@ public class LogoFrame extends JFrame {
 					.setBorder(javax.swing.BorderFactory
 							.createTitledBorder(
 									null,
-									"Contrôle",
+									"Contrï¿½le",
 									javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 									javax.swing.border.TitledBorder.DEFAULT_POSITION,
 									null, null));

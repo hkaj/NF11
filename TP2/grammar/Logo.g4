@@ -1,7 +1,7 @@
 grammar Logo; 
 
 @header {
-  package logoparsing;
+  package logoparsing.grammar;
 }
 
 INT : '0' | [1-9][0-9]* ;
@@ -15,5 +15,6 @@ liste_instructions :
 instruction :
     'av' INT # av
   | 'td' INT # td
+  | 'tg' INT # tg
 ;  
    
