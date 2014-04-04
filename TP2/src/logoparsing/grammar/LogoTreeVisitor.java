@@ -3,6 +3,7 @@ package logoparsing.grammar;
 import logogui.Traceur;
 import logoparsing.grammar.LogoParser.AvContext;
 import logoparsing.grammar.LogoParser.TdContext;
+import logoparsing.grammar.LogoParser.TgContext;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
@@ -30,6 +31,16 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		traceur.avance(getAttValue(ctx.INT()));
 		return 0;
 	}
+	
+	@Override
+	public Integer visitTg(TgContext ctx) {
+		visitChildren(ctx);
+		String intText = ctx.INT().getText(); 
+		setAttValue(ctx.INT(), Integer.valueOf(intText));
+		traceur.tg(getAttValue(ctx.INT()));		
+		return 0;
+	}
+	
 	@Override
 	public Integer visitTd(TdContext ctx) {
 		visitChildren(ctx);

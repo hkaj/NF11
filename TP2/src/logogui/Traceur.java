@@ -39,6 +39,11 @@ public class Traceur {
 		posx = a;
 		posy = b;
 	}
+
+	public void tg(double r) {
+		angle = (angle + toInt(r)) % 360;
+		setTeta();
+	}
 	
 	public void td(double r) {
 		angle = (angle - toInt(r)) % 360;

@@ -22,6 +22,7 @@ import javax.swing.event.ChangeListener;
 import logoparsing.grammar.LogoLexer;
 import logoparsing.grammar.LogoParser;
 import logoparsing.grammar.LogoParser.ProgrammeContext;
+import logoparsing.grammar.LogoTreeVisitor;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
