@@ -12,9 +12,14 @@ programme : liste_instructions
 liste_instructions :
   (instruction)+   
 ;
+
+expr:
+	expr ('*'|'/') expr
+  | INT
+ ;
+ 
 instruction :
-    'av' INT # av
-  | 'td' INT # td
-  | 'tg' INT # tg
-;  
-   
+    'av' expr # av
+  | 'td' expr # td
+  | 'tg' expr # tg
+;

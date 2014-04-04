@@ -49,5 +49,9 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		traceur.td(getAttValue(ctx.INT()));
 		return 0;
 	}
-	
+	@Override
+	public Integer visitExpr(ExprContext ctx) {
+		setAttValue(ctx.expr(), );
+		return getAttValue(ctx.expr());
+	}
 }
