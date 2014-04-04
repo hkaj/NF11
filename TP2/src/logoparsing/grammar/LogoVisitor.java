@@ -21,6 +21,20 @@ public interface LogoVisitor<T> extends ParseTreeVisitor<T> {
 	T visitProgramme(@NotNull LogoParser.ProgrammeContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link LogoParser#mult}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMult(@NotNull LogoParser.MultContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#int}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInt(@NotNull LogoParser.IntContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link LogoParser#tg}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

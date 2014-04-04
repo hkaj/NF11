@@ -14,8 +14,8 @@ liste_instructions :
 ;
 
 expr:
-	expr ('*'|'/') expr
-  | INT
+	expr ('*'|'/') expr # mult
+  | INT # int
  ;
  
 instruction :

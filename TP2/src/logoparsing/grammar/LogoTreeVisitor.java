@@ -2,6 +2,9 @@ package logoparsing.grammar;
 
 import logogui.Traceur;
 import logoparsing.grammar.LogoParser.AvContext;
+import logoparsing.grammar.LogoParser.ExprContext;
+import logoparsing.grammar.LogoParser.IntContext;
+import logoparsing.grammar.LogoParser.MultContext;
 import logoparsing.grammar.LogoParser.TdContext;
 import logoparsing.grammar.LogoParser.TgContext;
 
@@ -26,32 +29,34 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	@Override
 	public Integer visitAv(AvContext ctx) {
 		visitChildren(ctx);
-		String intText = ctx.INT().getText(); 
-		setAttValue(ctx.INT(), Integer.valueOf(intText));
-		traceur.avance(getAttValue(ctx.INT()));
+		String intText = ctx.getText(); 
+		traceur.avance(getAttValue(ctx.expr()));
 		return 0;
 	}
 	
 	@Override
 	public Integer visitTg(TgContext ctx) {
 		visitChildren(ctx);
-		String intText = ctx.INT().getText(); 
-		setAttValue(ctx.INT(), Integer.valueOf(intText));
-		traceur.tg(getAttValue(ctx.INT()));		
+		traceur.tg(getAttValue(ctx.expr()));		
 		return 0;
 	}
 	
 	@Override
 	public Integer visitTd(TdContext ctx) {
 		visitChildren(ctx);
-		String intText = ctx.INT().getText(); 
-		setAttValue(ctx.INT(), Integer.valueOf(intText));
-		traceur.td(getAttValue(ctx.INT()));
+		traceur.td(getAttValue(ctx.expr()));
 		return 0;
 	}
 	@Override
-	public Integer visitExpr(ExprContext ctx) {
-		setAttValue(ctx.expr(), );
-		return getAttValue(ctx.expr());
+	public Integer visitMult(MultContext ctx) {
+		int res = Integer.parseInt(ctx.expr(0).getText()) * Integer.parseInt(ctx.expr(1).getText());
+		setAttValue(ctx, res);
+		return res;
+	}
+	@Override
+	public Integer visitInt(IntContext ctx) {
+		int res = Integer.parseInt(ctx.getText());
+		setAttValue(ctx, res);
+		return res;
 	}
 }
