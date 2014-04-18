@@ -32,6 +32,19 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSub(@NotNull LogoParser.SubContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSub(@NotNull LogoParser.SubContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMult(@NotNull LogoParser.MultContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -71,6 +84,19 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDiv(@NotNull LogoParser.DivContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDiv(@NotNull LogoParser.DivContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTd(@NotNull LogoParser.TdContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -78,6 +104,19 @@ public class LogoBaseListener implements LogoListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTd(@NotNull LogoParser.TdContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAdd(@NotNull LogoParser.AddContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAdd(@NotNull LogoParser.AddContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

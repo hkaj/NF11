@@ -14,7 +14,10 @@ liste_instructions :
 ;
 
 expr:
-	expr ('*'|'/') expr # mult
+    expr '*' expr # mult
+  | expr '/' expr # div
+  | expr '+' expr # add
+  | expr '-' expr # sub 
   | INT # int
  ;
  

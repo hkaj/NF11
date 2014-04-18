@@ -1,15 +1,20 @@
 package logoparsing.grammar;
 
 import logogui.Traceur;
+import logoparsing.grammar.LogoParser.AddContext;
 import logoparsing.grammar.LogoParser.AvContext;
+import logoparsing.grammar.LogoParser.DivContext;
 import logoparsing.grammar.LogoParser.ExprContext;
 import logoparsing.grammar.LogoParser.IntContext;
 import logoparsing.grammar.LogoParser.MultContext;
+import logoparsing.grammar.LogoParser.SubContext;
 import logoparsing.grammar.LogoParser.TdContext;
 import logoparsing.grammar.LogoParser.TgContext;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
+
+import com.sun.xml.internal.bind.v2.runtime.reflect.Accessor.SetterOnlyReflection;
 
 public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	Traceur traceur;
@@ -25,7 +30,7 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	public void setAttValue(ParseTree node, int value) { 
 		atts.put(node, value);
 	}
-	public int getAttValue(ParseTree node) { return atts.get(node); }
+	public Integer getAttValue(ParseTree node) { return atts.get(node); }
 	@Override
 	public Integer visitAv(AvContext ctx) {
 		visitChildren(ctx);
@@ -49,14 +54,52 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	}
 	@Override
 	public Integer visitMult(MultContext ctx) {
-		int res = Integer.parseInt(ctx.expr(0).getText()) * Integer.parseInt(ctx.expr(1).getText());
+		visitChildren(ctx);
+		int a = getValueFromTree(ctx.expr(0));
+		int b = getValueFromTree(ctx.expr(1));
+		System.out.println(ctx);
+		int res = a * b;
+		setAttValue(ctx, res);
+		return res;
+	}
+
+	@Override
+	public Integer visitDiv(DivContext ctx) {
+		visitChildren(ctx);
+		int a = getValueFromTree(ctx.expr(0));
+		int b = getValueFromTree(ctx.expr(1));
+		int res = a / b;
 		setAttValue(ctx, res);
 		return res;
 	}
 	@Override
+	public Integer visitAdd(AddContext ctx) {
+		visitChildren(ctx);
+		int a = getValueFromTree(ctx.expr(0));
+		int b = getValueFromTree(ctx.expr(1));
+		int res = a + b;
+		setAttValue(ctx, res);
+		return res;
+	}
+	@Override
+	public Integer visitSub(SubContext ctx) {
+		visitChildren(ctx);
+		int a = getValueFromTree(ctx.expr(0));
+		int b = getValueFromTree(ctx.expr(1));
+		int res = a - b;
+		setAttValue(ctx, res);
+		return res;
+	}
+
+	@Override
 	public Integer visitInt(IntContext ctx) {
+		visitChildren(ctx);
 		int res = Integer.parseInt(ctx.getText());
 		setAttValue(ctx, res);
 		return res;
+	}
+
+	private int getValueFromTree(ExprContext ctx) {
+		return getAttValue(ctx);
 	}
 }
