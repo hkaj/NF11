@@ -23,6 +23,13 @@ expr:
  
 instruction :
     'av' expr # av
+  | 're' expr # re
   | 'td' expr # td
   | 'tg' expr # tg
+  | 'fpos' expr expr # fpos
+  | 'fcc' expr # fcc
+  | 'lc' # lc
+  | 'bc' # bc
+  | 've' # ve
+  
 ;

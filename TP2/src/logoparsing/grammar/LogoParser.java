@@ -17,10 +17,11 @@ public class LogoParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__6=1, T__5=2, T__4=3, T__3=4, T__2=5, T__1=6, T__0=7, INT=8, WS=9;
+		T__12=1, T__11=2, T__10=3, T__9=4, T__8=5, T__7=6, T__6=7, T__5=8, T__4=9, 
+		T__3=10, T__2=11, T__1=12, T__0=13, INT=14, WS=15;
 	public static final String[] tokenNames = {
-		"<INVALID>", "'+'", "'*'", "'-'", "'tg'", "'/'", "'av'", "'td'", "INT", 
-		"WS"
+		"<INVALID>", "'+'", "'fpos'", "'-'", "'*'", "'bc'", "'tg'", "'lc'", "'av'", 
+		"'fcc'", "'ve'", "'/'", "'re'", "'td'", "INT", "WS"
 	};
 	public static final int
 		RULE_programme = 0, RULE_liste_instructions = 1, RULE_expr = 2, RULE_instruction = 3;
@@ -135,7 +136,7 @@ public class LogoParser extends Parser {
 				setState(13); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 4) | (1L << 6) | (1L << 7))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 2) | (1L << 5) | (1L << 6) | (1L << 7) | (1L << 8) | (1L << 9) | (1L << 10) | (1L << 12) | (1L << 13))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -305,7 +306,7 @@ public class LogoParser extends Parser {
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(18);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(19); match(2);
+						setState(19); match(4);
 						setState(20); expr(6);
 						}
 						break;
@@ -316,7 +317,7 @@ public class LogoParser extends Parser {
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(21);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(22); match(5);
+						setState(22); match(11);
 						setState(23); expr(5);
 						}
 						break;
@@ -392,6 +393,60 @@ public class LogoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class FposContext extends InstructionContext {
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public FposContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).enterFpos(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).exitFpos(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LogoVisitor ) return ((LogoVisitor<? extends T>)visitor).visitFpos(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class VeContext extends InstructionContext {
+		public VeContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).enterVe(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).exitVe(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LogoVisitor ) return ((LogoVisitor<? extends T>)visitor).visitVe(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class LcContext extends InstructionContext {
+		public LcContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).enterLc(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).exitLc(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LogoVisitor ) return ((LogoVisitor<? extends T>)visitor).visitLc(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class TdContext extends InstructionContext {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
@@ -408,6 +463,60 @@ public class LogoParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof LogoVisitor ) return ((LogoVisitor<? extends T>)visitor).visitTd(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ReContext extends InstructionContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public ReContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).enterRe(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).exitRe(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LogoVisitor ) return ((LogoVisitor<? extends T>)visitor).visitRe(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class FccContext extends InstructionContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public FccContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).enterFcc(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).exitFcc(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LogoVisitor ) return ((LogoVisitor<? extends T>)visitor).visitFcc(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BcContext extends InstructionContext {
+		public BcContext(InstructionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).enterBc(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LogoListener ) ((LogoListener)listener).exitBc(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LogoVisitor ) return ((LogoVisitor<? extends T>)visitor).visitBc(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -435,30 +544,76 @@ public class LogoParser extends Parser {
 		InstructionContext _localctx = new InstructionContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_instruction);
 		try {
-			setState(41);
+			setState(52);
 			switch (_input.LA(1)) {
-			case 6:
+			case 8:
 				_localctx = new AvContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(35); match(6);
+				setState(35); match(8);
 				setState(36); expr(0);
 				}
 				break;
-			case 7:
-				_localctx = new TdContext(_localctx);
+			case 12:
+				_localctx = new ReContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(37); match(7);
+				setState(37); match(12);
 				setState(38); expr(0);
 				}
 				break;
-			case 4:
-				_localctx = new TgContext(_localctx);
+			case 13:
+				_localctx = new TdContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(39); match(4);
+				setState(39); match(13);
 				setState(40); expr(0);
+				}
+				break;
+			case 6:
+				_localctx = new TgContext(_localctx);
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(41); match(6);
+				setState(42); expr(0);
+				}
+				break;
+			case 2:
+				_localctx = new FposContext(_localctx);
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(43); match(2);
+				setState(44); expr(0);
+				setState(45); expr(0);
+				}
+				break;
+			case 9:
+				_localctx = new FccContext(_localctx);
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(47); match(9);
+				setState(48); expr(0);
+				}
+				break;
+			case 7:
+				_localctx = new LcContext(_localctx);
+				enterOuterAlt(_localctx, 7);
+				{
+				setState(49); match(7);
+				}
+				break;
+			case 5:
+				_localctx = new BcContext(_localctx);
+				enterOuterAlt(_localctx, 8);
+				{
+				setState(50); match(5);
+				}
+				break;
+			case 10:
+				_localctx = new VeContext(_localctx);
+				enterOuterAlt(_localctx, 9);
+				{
+				setState(51); match(10);
 				}
 				break;
 			default:
@@ -496,18 +651,23 @@ public class LogoParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\13.\4\2\t\2\4\3\t"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\219\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\3\2\3\2\3\3\6\3\16\n\3\r\3\16\3\17\3\4\3\4\3\4\3\4"+
 		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4!\n\4\f\4\16\4$\13\4\3"+
-		"\5\3\5\3\5\3\5\3\5\3\5\5\5,\n\5\3\5\2\3\6\6\2\4\6\b\2\2\60\2\n\3\2\2\2"+
-		"\4\r\3\2\2\2\6\21\3\2\2\2\b+\3\2\2\2\n\13\5\4\3\2\13\3\3\2\2\2\f\16\5"+
-		"\b\5\2\r\f\3\2\2\2\16\17\3\2\2\2\17\r\3\2\2\2\17\20\3\2\2\2\20\5\3\2\2"+
-		"\2\21\22\b\4\1\2\22\23\7\n\2\2\23\"\3\2\2\2\24\25\f\7\2\2\25\26\7\4\2"+
-		"\2\26!\5\6\4\b\27\30\f\6\2\2\30\31\7\7\2\2\31!\5\6\4\7\32\33\f\5\2\2\33"+
-		"\34\7\3\2\2\34!\5\6\4\6\35\36\f\4\2\2\36\37\7\5\2\2\37!\5\6\4\5 \24\3"+
-		"\2\2\2 \27\3\2\2\2 \32\3\2\2\2 \35\3\2\2\2!$\3\2\2\2\" \3\2\2\2\"#\3\2"+
-		"\2\2#\7\3\2\2\2$\"\3\2\2\2%&\7\b\2\2&,\5\6\4\2\'(\7\t\2\2(,\5\6\4\2)*"+
-		"\7\6\2\2*,\5\6\4\2+%\3\2\2\2+\'\3\2\2\2+)\3\2\2\2,\t\3\2\2\2\6\17 \"+";
+		"\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5"+
+		"\67\n\5\3\5\2\3\6\6\2\4\6\b\2\2A\2\n\3\2\2\2\4\r\3\2\2\2\6\21\3\2\2\2"+
+		"\b\66\3\2\2\2\n\13\5\4\3\2\13\3\3\2\2\2\f\16\5\b\5\2\r\f\3\2\2\2\16\17"+
+		"\3\2\2\2\17\r\3\2\2\2\17\20\3\2\2\2\20\5\3\2\2\2\21\22\b\4\1\2\22\23\7"+
+		"\20\2\2\23\"\3\2\2\2\24\25\f\7\2\2\25\26\7\6\2\2\26!\5\6\4\b\27\30\f\6"+
+		"\2\2\30\31\7\r\2\2\31!\5\6\4\7\32\33\f\5\2\2\33\34\7\3\2\2\34!\5\6\4\6"+
+		"\35\36\f\4\2\2\36\37\7\5\2\2\37!\5\6\4\5 \24\3\2\2\2 \27\3\2\2\2 \32\3"+
+		"\2\2\2 \35\3\2\2\2!$\3\2\2\2\" \3\2\2\2\"#\3\2\2\2#\7\3\2\2\2$\"\3\2\2"+
+		"\2%&\7\n\2\2&\67\5\6\4\2\'(\7\16\2\2(\67\5\6\4\2)*\7\17\2\2*\67\5\6\4"+
+		"\2+,\7\b\2\2,\67\5\6\4\2-.\7\4\2\2./\5\6\4\2/\60\5\6\4\2\60\67\3\2\2\2"+
+		"\61\62\7\13\2\2\62\67\5\6\4\2\63\67\7\t\2\2\64\67\7\7\2\2\65\67\7\f\2"+
+		"\2\66%\3\2\2\2\66\'\3\2\2\2\66)\3\2\2\2\66+\3\2\2\2\66-\3\2\2\2\66\61"+
+		"\3\2\2\2\66\63\3\2\2\2\66\64\3\2\2\2\66\65\3\2\2\2\67\t\3\2\2\2\6\17 "+
+		"\"\66";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

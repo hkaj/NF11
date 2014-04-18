@@ -3,18 +3,22 @@ package logoparsing.grammar;
 import logogui.Traceur;
 import logoparsing.grammar.LogoParser.AddContext;
 import logoparsing.grammar.LogoParser.AvContext;
+import logoparsing.grammar.LogoParser.BcContext;
 import logoparsing.grammar.LogoParser.DivContext;
 import logoparsing.grammar.LogoParser.ExprContext;
+import logoparsing.grammar.LogoParser.FccContext;
+import logoparsing.grammar.LogoParser.FposContext;
 import logoparsing.grammar.LogoParser.IntContext;
+import logoparsing.grammar.LogoParser.LcContext;
 import logoparsing.grammar.LogoParser.MultContext;
+import logoparsing.grammar.LogoParser.ReContext;
 import logoparsing.grammar.LogoParser.SubContext;
 import logoparsing.grammar.LogoParser.TdContext;
 import logoparsing.grammar.LogoParser.TgContext;
+import logoparsing.grammar.LogoParser.VeContext;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
-
-import com.sun.xml.internal.bind.v2.runtime.reflect.Accessor.SetterOnlyReflection;
 
 public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	Traceur traceur;
@@ -38,6 +42,14 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		traceur.avance(getAttValue(ctx.expr()));
 		return 0;
 	}
+
+	@Override
+	public Integer visitRe(ReContext ctx) {
+		visitChildren(ctx);
+		String intText = ctx.getText(); 
+		traceur.recule(getAttValue(ctx.expr()));
+		return 0;
+	}	
 	
 	@Override
 	public Integer visitTg(TgContext ctx) {
@@ -99,6 +111,45 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		return res;
 	}
 
+	@Override
+	public Integer visitLc(LcContext ctx) {
+		visitChildren(ctx);		
+		traceur.setDrawing(false);
+		return 0;
+	}
+
+	@Override
+	public Integer visitBc(BcContext ctx) {
+		visitChildren(ctx);		
+		traceur.setDrawing(true);
+		return 0;
+	}
+	
+	@Override
+	public Integer visitVe(VeContext ctx) {
+		visitChildren(ctx);
+		traceur.clear();
+		traceur.setPos(300, 300);
+		return 0;
+	}
+
+	@Override
+	public Integer visitFpos(FposContext ctx) {
+		visitChildren(ctx);
+		int a = getValueFromTree(ctx.expr(0));
+		int b = getValueFromTree(ctx.expr(1));
+		traceur.setPos(a, b);
+		return 0;
+	}	
+
+	@Override
+	public Integer visitFcc(FccContext ctx) {
+		visitChildren(ctx);
+		int n = getValueFromTree(ctx.expr());		
+		traceur.setColor(n);
+		return 0;
+	}	
+	
 	private int getValueFromTree(ExprContext ctx) {
 		return getAttValue(ctx);
 	}
