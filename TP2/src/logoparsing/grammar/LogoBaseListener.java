@@ -45,6 +45,19 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSet(@NotNull LogoParser.SetContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSet(@NotNull LogoParser.SetContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterInt(@NotNull LogoParser.IntContext ctx) { }
 	/**
 	 * {@inheritDoc}

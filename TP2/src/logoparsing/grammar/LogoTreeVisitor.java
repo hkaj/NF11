@@ -199,7 +199,15 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		int n = getValueFromTree(ctx.expr());		
 		traceur.setColor(n);
 		return 0;
-	}	
+	}
+	
+	@Override
+	public Integer visitSet(LogoParser.SetContext ctx)
+	{
+		visitChildren(ctx);
+		// TBD
+		return 0;
+	}
 	
 	private int getValueFromTree(ExprContext ctx) {
 		return getAttValue(ctx);

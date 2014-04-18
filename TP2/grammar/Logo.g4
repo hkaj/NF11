@@ -36,4 +36,5 @@ instruction :
   | 'lc' # lc
   | 'bc' # bc
   | 've' # ve
+  | 'set' expr # set
 ;
