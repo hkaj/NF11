@@ -35,11 +35,11 @@ public interface LogoVisitor<T> extends ParseTreeVisitor<T> {
 	T visitInt(@NotNull LogoParser.IntContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link LogoParser#div}.
+	 * Visit a parse tree produced by {@link LogoParser#nequal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDiv(@NotNull LogoParser.DivContext ctx);
+	T visitNequal(@NotNull LogoParser.NequalContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link LogoParser#tg}.
@@ -49,18 +49,32 @@ public interface LogoVisitor<T> extends ParseTreeVisitor<T> {
 	T visitTg(@NotNull LogoParser.TgContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link LogoParser#div}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDiv(@NotNull LogoParser.DivContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#inf}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInf(@NotNull LogoParser.InfContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#equal}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEqual(@NotNull LogoParser.EqualContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link LogoParser#td}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitTd(@NotNull LogoParser.TdContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link LogoParser#add}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAdd(@NotNull LogoParser.AddContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link LogoParser#re}.
@@ -70,11 +84,18 @@ public interface LogoVisitor<T> extends ParseTreeVisitor<T> {
 	T visitRe(@NotNull LogoParser.ReContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link LogoParser#liste_instructions}.
+	 * Visit a parse tree produced by {@link LogoParser#add}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitListe_instructions(@NotNull LogoParser.Liste_instructionsContext ctx);
+	T visitAdd(@NotNull LogoParser.AddContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#sup}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSup(@NotNull LogoParser.SupContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link LogoParser#av}.
@@ -82,6 +103,20 @@ public interface LogoVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAv(@NotNull LogoParser.AvContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#liste_instructions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListe_instructions(@NotNull LogoParser.Liste_instructionsContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#par}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPar(@NotNull LogoParser.ParContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link LogoParser#programme}.

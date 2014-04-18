@@ -11,12 +11,14 @@ import logoparsing.grammar.LogoParser.FposContext;
 import logoparsing.grammar.LogoParser.IntContext;
 import logoparsing.grammar.LogoParser.LcContext;
 import logoparsing.grammar.LogoParser.MultContext;
+import logoparsing.grammar.LogoParser.ParContext;
 import logoparsing.grammar.LogoParser.ReContext;
 import logoparsing.grammar.LogoParser.SubContext;
 import logoparsing.grammar.LogoParser.TdContext;
 import logoparsing.grammar.LogoParser.TgContext;
 import logoparsing.grammar.LogoParser.VeContext;
 
+import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
@@ -112,6 +114,14 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	}
 
 	@Override
+	public Integer visitPar(ParContext ctx) {
+		visitChildren(ctx);
+		int res = getAttValue(ctx.expr());
+		setAttValue(ctx, res);
+		return res;
+	}
+	
+	@Override
 	public Integer visitLc(LcContext ctx) {
 		visitChildren(ctx);		
 		traceur.setDrawing(false);
@@ -141,7 +151,48 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		traceur.setPos(a, b);
 		return 0;
 	}	
+	
+	@Override
+	public Integer visitEqual(@NotNull LogoParser.EqualContext ctx) {
+		visitChildren(ctx);
+		int a = getValueFromTree(ctx.expr(0));
+		int b = getValueFromTree(ctx.expr(1));
+		int val = (a == b) ? 1 : 0;
+		setAttValue(ctx, val);		
+		return val;
+	}
+	
+	@Override
+	public Integer visitNequal(@NotNull LogoParser.NequalContext ctx) {
+		visitChildren(ctx);
+		int a = getValueFromTree(ctx.expr(0));
+		int b = getValueFromTree(ctx.expr(1));
+		int val = (a != b) ? 1 : 0;
+		setAttValue(ctx, val);		
+		return val;
+	}
+	
+	@Override
+	public Integer visitInf(@NotNull LogoParser.InfContext ctx) {
+		visitChildren(ctx);
+		int a = getValueFromTree(ctx.expr(0));
+		int b = getValueFromTree(ctx.expr(1));
+		int val = (a < b) ? 1 : 0;
+		setAttValue(ctx, val);		
+		return val;
+	}
 
+	@Override
+	public Integer visitSup(@NotNull LogoParser.SupContext ctx) {
+		visitChildren(ctx);
+		int a = getValueFromTree(ctx.expr(0));
+		int b = getValueFromTree(ctx.expr(1));
+		int val = (a > b) ? 1 : 0;
+		setAttValue(ctx, val);		
+		return val;
+	}
+	
+	
 	@Override
 	public Integer visitFcc(FccContext ctx) {
 		visitChildren(ctx);

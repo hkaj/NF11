@@ -58,13 +58,13 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDiv(@NotNull LogoParser.DivContext ctx) { }
+	@Override public void enterNequal(@NotNull LogoParser.NequalContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDiv(@NotNull LogoParser.DivContext ctx) { }
+	@Override public void exitNequal(@NotNull LogoParser.NequalContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -84,6 +84,45 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDiv(@NotNull LogoParser.DivContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDiv(@NotNull LogoParser.DivContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInf(@NotNull LogoParser.InfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInf(@NotNull LogoParser.InfContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEqual(@NotNull LogoParser.EqualContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEqual(@NotNull LogoParser.EqualContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTd(@NotNull LogoParser.TdContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -91,19 +130,6 @@ public class LogoBaseListener implements LogoListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTd(@NotNull LogoParser.TdContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAdd(@NotNull LogoParser.AddContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAdd(@NotNull LogoParser.AddContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -123,13 +149,26 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterListe_instructions(@NotNull LogoParser.Liste_instructionsContext ctx) { }
+	@Override public void enterAdd(@NotNull LogoParser.AddContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitListe_instructions(@NotNull LogoParser.Liste_instructionsContext ctx) { }
+	@Override public void exitAdd(@NotNull LogoParser.AddContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSup(@NotNull LogoParser.SupContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSup(@NotNull LogoParser.SupContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -143,6 +182,32 @@ public class LogoBaseListener implements LogoListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAv(@NotNull LogoParser.AvContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterListe_instructions(@NotNull LogoParser.Liste_instructionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListe_instructions(@NotNull LogoParser.Liste_instructionsContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPar(@NotNull LogoParser.ParContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPar(@NotNull LogoParser.ParContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

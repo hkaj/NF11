@@ -14,10 +14,15 @@ liste_instructions :
 ;
 
 expr:
-    expr '*' expr # mult
+  expr '*' expr # mult
   | expr '/' expr # div
   | expr '+' expr # add
   | expr '-' expr # sub 
+  |  expr '<' expr # inf
+  | expr '>' expr # sup
+  | expr '==' expr # equal
+  | expr '!=' expr # nequal
+  | '(' expr ')' # par
   | INT # int
  ;
  
@@ -31,5 +36,4 @@ instruction :
   | 'lc' # lc
   | 'bc' # bc
   | 've' # ve
-  
 ;
