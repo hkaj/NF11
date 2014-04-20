@@ -6,9 +6,11 @@ grammar Logo;
 
 INT : '0' | [1-9][0-9]* ;
 WS : [ \t\r\n]+ -> skip ;
+ID : [a-zA-Z][0-9a-zA-Z]*;
 
 programme : liste_instructions 
 ;
+
 liste_instructions :
   (instruction)+   
 ;
@@ -18,7 +20,7 @@ expr:
   | expr '/' expr # div
   | expr '+' expr # add
   | expr '-' expr # sub 
-  |  expr '<' expr # inf
+  | expr '<' expr # inf
   | expr '>' expr # sup
   | expr '==' expr # equal
   | expr '!=' expr # nequal
@@ -36,5 +38,5 @@ instruction :
   | 'lc' # lc
   | 'bc' # bc
   | 've' # ve
-  | 'set' expr # set
+  | 'set' ID expr # set
 ;

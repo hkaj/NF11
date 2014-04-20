@@ -1,5 +1,7 @@
 package logoparsing.grammar;
 
+import java.util.Map;
+
 import logogui.Traceur;
 import logoparsing.grammar.LogoParser.AddContext;
 import logoparsing.grammar.LogoParser.AvContext;
@@ -13,6 +15,7 @@ import logoparsing.grammar.LogoParser.LcContext;
 import logoparsing.grammar.LogoParser.MultContext;
 import logoparsing.grammar.LogoParser.ParContext;
 import logoparsing.grammar.LogoParser.ReContext;
+import logoparsing.grammar.LogoParser.SetContext;
 import logoparsing.grammar.LogoParser.SubContext;
 import logoparsing.grammar.LogoParser.TdContext;
 import logoparsing.grammar.LogoParser.TgContext;
@@ -202,13 +205,16 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	}
 	
 	@Override
-	public Integer visitSet(LogoParser.SetContext ctx)
+	public Integer visitSet(SetContext ctx)
 	{
 		visitChildren(ctx);
-		// TBD
+		String var = ctx.ID().getText();
+		int value = getValueFromTree(ctx.expr());
+		m_vars.put(var, value);
 		return 0;
 	}
 	
+	private Map<String, Integer> m_vars;
 	private int getValueFromTree(ExprContext ctx) {
 		return getAttValue(ctx);
 	}
