@@ -1,5 +1,6 @@
 package logoparsing.grammar;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import logogui.Traceur;
@@ -10,6 +11,7 @@ import logoparsing.grammar.LogoParser.DivContext;
 import logoparsing.grammar.LogoParser.ExprContext;
 import logoparsing.grammar.LogoParser.FccContext;
 import logoparsing.grammar.LogoParser.FposContext;
+import logoparsing.grammar.LogoParser.IdContext;
 import logoparsing.grammar.LogoParser.IntContext;
 import logoparsing.grammar.LogoParser.LcContext;
 import logoparsing.grammar.LogoParser.MultContext;
@@ -28,7 +30,8 @@ import org.antlr.v4.runtime.tree.ParseTreeProperty;
 public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	Traceur traceur;
 	ParseTreeProperty<Integer> atts = new ParseTreeProperty<Integer>();
-
+	private Map<String, Integer> m_vars = new HashMap<String, Integer>();
+	
 	public LogoTreeVisitor() {
 		super();
 	}
@@ -39,7 +42,13 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	public void setAttValue(ParseTree node, int value) { 
 		atts.put(node, value);
 	}
-	public Integer getAttValue(ParseTree node) { return atts.get(node); }
+
+	public Integer getAttValue(ParseTree node) { return atts.get(node); }	
+
+	private int getValueFromTree(ExprContext ctx) {
+		return getAttValue(ctx);
+	}
+	
 	@Override
 	public Integer visitAv(AvContext ctx) {
 		visitChildren(ctx);
@@ -107,15 +116,7 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		setAttValue(ctx, res);
 		return res;
 	}
-
-	@Override
-	public Integer visitInt(IntContext ctx) {
-		visitChildren(ctx);
-		int res = Integer.parseInt(ctx.getText());
-		setAttValue(ctx, res);
-		return res;
-	}
-
+	
 	@Override
 	public Integer visitPar(ParContext ctx) {
 		visitChildren(ctx);
@@ -208,14 +209,33 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	public Integer visitSet(SetContext ctx)
 	{
 		visitChildren(ctx);
-		String var = ctx.ID().getText();
+		String var = ctx.DECLARATION_ID().getText().replace("\"", "");
 		int value = getValueFromTree(ctx.expr());
 		m_vars.put(var, value);
 		return 0;
 	}
-	
-	private Map<String, Integer> m_vars;
-	private int getValueFromTree(ExprContext ctx) {
-		return getAttValue(ctx);
+
+	@Override
+	public Integer visitInt(IntContext ctx) {
+		visitChildren(ctx);
+		int res = Integer.parseInt(ctx.getText());
+		setAttValue(ctx, res);
+		return res;
 	}
+
+	@Override
+	public Integer visitId(IdContext ctx) {
+		visitChildren(ctx);
+		String symbol = ctx.getText().replace(":", "");
+		if (! m_vars.containsKey(symbol)) {
+			throw new RuntimeException("Undefined variable " + ctx.getText());
+		}
+		int res = m_vars.get(symbol);
+		setAttValue(ctx, res);
+		return res;
+	}
+	
+
 }
+
+

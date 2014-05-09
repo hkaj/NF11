@@ -35,18 +35,18 @@ public interface LogoVisitor<T> extends ParseTreeVisitor<T> {
 	T visitSet(@NotNull LogoParser.SetContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link LogoParser#int}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInt(@NotNull LogoParser.IntContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link LogoParser#nequal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitNequal(@NotNull LogoParser.NequalContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#int}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInt(@NotNull LogoParser.IntContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link LogoParser#tg}.
@@ -124,6 +124,13 @@ public interface LogoVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPar(@NotNull LogoParser.ParContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#id}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitId(@NotNull LogoParser.IdContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link LogoParser#programme}.

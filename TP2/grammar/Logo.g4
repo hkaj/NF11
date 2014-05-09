@@ -6,7 +6,8 @@ grammar Logo;
 
 INT : '0' | [1-9][0-9]* ;
 WS : [ \t\r\n]+ -> skip ;
-ID : [a-zA-Z][0-9a-zA-Z]*;
+DECLARATION_ID : '"'[a-zA-Z][0-9a-zA-Z]*;
+ID : ':'[a-zA-Z][0-9a-zA-Z]*;
 
 programme : liste_instructions 
 ;
@@ -26,6 +27,7 @@ expr:
   | expr '!=' expr # nequal
   | '(' expr ')' # par
   | INT # int
+  | ID  # id
  ;
  
 instruction :
@@ -38,5 +40,5 @@ instruction :
   | 'lc' # lc
   | 'bc' # bc
   | 've' # ve
-  | 'set' ID expr # set
+  | 'set' DECLARATION_ID expr # set
 ;

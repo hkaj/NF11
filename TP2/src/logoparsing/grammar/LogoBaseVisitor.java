@@ -44,7 +44,7 @@ public class LogoBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements L
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitInt(@NotNull LogoParser.IntContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNequal(@NotNull LogoParser.NequalContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -52,7 +52,7 @@ public class LogoBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements L
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNequal(@NotNull LogoParser.NequalContext ctx) { return visitChildren(ctx); }
+	@Override public T visitInt(@NotNull LogoParser.IntContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -141,6 +141,14 @@ public class LogoBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements L
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitPar(@NotNull LogoParser.ParContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitId(@NotNull LogoParser.IdContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}

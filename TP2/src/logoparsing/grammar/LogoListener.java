@@ -44,17 +44,6 @@ public interface LogoListener extends ParseTreeListener {
 	void exitSet(@NotNull LogoParser.SetContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link LogoParser#int}.
-	 * @param ctx the parse tree
-	 */
-	void enterInt(@NotNull LogoParser.IntContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link LogoParser#int}.
-	 * @param ctx the parse tree
-	 */
-	void exitInt(@NotNull LogoParser.IntContext ctx);
-
-	/**
 	 * Enter a parse tree produced by {@link LogoParser#nequal}.
 	 * @param ctx the parse tree
 	 */
@@ -64,6 +53,17 @@ public interface LogoListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNequal(@NotNull LogoParser.NequalContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#int}.
+	 * @param ctx the parse tree
+	 */
+	void enterInt(@NotNull LogoParser.IntContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#int}.
+	 * @param ctx the parse tree
+	 */
+	void exitInt(@NotNull LogoParser.IntContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link LogoParser#tg}.
@@ -185,6 +185,17 @@ public interface LogoListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPar(@NotNull LogoParser.ParContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#id}.
+	 * @param ctx the parse tree
+	 */
+	void enterId(@NotNull LogoParser.IdContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#id}.
+	 * @param ctx the parse tree
+	 */
+	void exitId(@NotNull LogoParser.IdContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link LogoParser#programme}.
