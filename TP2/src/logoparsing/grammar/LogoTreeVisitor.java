@@ -12,6 +12,7 @@ import logoparsing.grammar.LogoParser.ExprContext;
 import logoparsing.grammar.LogoParser.FccContext;
 import logoparsing.grammar.LogoParser.FposContext;
 import logoparsing.grammar.LogoParser.IdContext;
+import logoparsing.grammar.LogoParser.IfContext;
 import logoparsing.grammar.LogoParser.IntContext;
 import logoparsing.grammar.LogoParser.LcContext;
 import logoparsing.grammar.LogoParser.MultContext;
@@ -233,6 +234,21 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		int res = m_vars.get(symbol);
 		setAttValue(ctx, res);
 		return res;
+	}
+	
+	@Override
+	public Integer visitIf(IfContext ctx) {
+		visit(ctx.expr());
+		int res = getAttValue(ctx.expr());
+		if (res == 1) {
+			visit(ctx.liste_instructions(0));
+		}
+		else {
+			if (ctx.liste_instructions().size() == 2) {
+				visit(ctx.liste_instructions(1));
+			}
+		}
+		return 0;
 	}
 	
 

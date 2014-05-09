@@ -41,4 +41,5 @@ instruction :
   | 'bc' # bc
   | 've' # ve
   | 'set' DECLARATION_ID expr # set
+  | 'if' expr '[' liste_instructions ']' ('[' liste_instructions ']')? # if
 ;
