@@ -25,6 +25,7 @@ import logoparsing.grammar.LogoParser.SubContext;
 import logoparsing.grammar.LogoParser.TdContext;
 import logoparsing.grammar.LogoParser.TgContext;
 import logoparsing.grammar.LogoParser.VeContext;
+import logoparsing.grammar.LogoParser.WhileContext;
 
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -271,6 +272,18 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		return n;
 	}
 	
+	@Override
+	public Integer visitWhile(WhileContext ctx) {
+		visit(ctx.expr());
+		int n = getAttValue(ctx.expr());
+		
+		while (n != 0) {
+			visit(ctx.liste_instructions());			
+			visit(ctx.expr());
+			n = getAttValue(ctx.expr());			
+		}
+		return 0;
+	}
 
 }
 
