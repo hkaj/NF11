@@ -19,19 +19,6 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSub(@NotNull LogoParser.SubContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSub(@NotNull LogoParser.SubContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterMult(@NotNull LogoParser.MultContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -45,13 +32,13 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNequal(@NotNull LogoParser.NequalContext ctx) { }
+	@Override public void enterSub(@NotNull LogoParser.SubContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNequal(@NotNull LogoParser.NequalContext ctx) { }
+	@Override public void exitSub(@NotNull LogoParser.SubContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -65,6 +52,19 @@ public class LogoBaseListener implements LogoListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSet(@NotNull LogoParser.SetContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNequal(@NotNull LogoParser.NequalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNequal(@NotNull LogoParser.NequalContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -123,19 +123,6 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSup(@NotNull LogoParser.SupContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSup(@NotNull LogoParser.SupContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterAdd(@NotNull LogoParser.AddContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -143,6 +130,19 @@ public class LogoBaseListener implements LogoListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAdd(@NotNull LogoParser.AddContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSup(@NotNull LogoParser.SupContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSup(@NotNull LogoParser.SupContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -188,6 +188,19 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunction(@NotNull LogoParser.FunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction(@NotNull LogoParser.FunctionContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterId(@NotNull LogoParser.IdContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -227,19 +240,6 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLoop(@NotNull LogoParser.LoopContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLoop(@NotNull LogoParser.LoopContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterVe(@NotNull LogoParser.VeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -253,6 +253,19 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLoop(@NotNull LogoParser.LoopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLoop(@NotNull LogoParser.LoopContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBc(@NotNull LogoParser.BcContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -260,6 +273,19 @@ public class LogoBaseListener implements LogoListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBc(@NotNull LogoParser.BcContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterProcedure(@NotNull LogoParser.ProcedureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProcedure(@NotNull LogoParser.ProcedureContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -331,6 +357,19 @@ public class LogoBaseListener implements LogoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterListe_functions(@NotNull LogoParser.Liste_functionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListe_functions(@NotNull LogoParser.Liste_functionsContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFpos(@NotNull LogoParser.FposContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -351,6 +390,32 @@ public class LogoBaseListener implements LogoListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLc(@NotNull LogoParser.LcContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionDeclaration(@NotNull LogoParser.FunctionDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionDeclaration(@NotNull LogoParser.FunctionDeclarationContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVariable(@NotNull LogoParser.VariableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariable(@NotNull LogoParser.VariableContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

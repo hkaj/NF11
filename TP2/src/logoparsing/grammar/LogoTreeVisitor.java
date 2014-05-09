@@ -1,7 +1,7 @@
 package logoparsing.grammar;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import logogui.Traceur;
 import logoparsing.grammar.LogoParser.AddContext;
@@ -11,6 +11,8 @@ import logoparsing.grammar.LogoParser.DivContext;
 import logoparsing.grammar.LogoParser.ExprContext;
 import logoparsing.grammar.LogoParser.FccContext;
 import logoparsing.grammar.LogoParser.FposContext;
+import logoparsing.grammar.LogoParser.FunctionContext;
+import logoparsing.grammar.LogoParser.FunctionDeclarationContext;
 import logoparsing.grammar.LogoParser.IdContext;
 import logoparsing.grammar.LogoParser.IfContext;
 import logoparsing.grammar.LogoParser.IntContext;
@@ -18,6 +20,7 @@ import logoparsing.grammar.LogoParser.LcContext;
 import logoparsing.grammar.LogoParser.LoopContext;
 import logoparsing.grammar.LogoParser.MultContext;
 import logoparsing.grammar.LogoParser.ParContext;
+import logoparsing.grammar.LogoParser.ProcedureContext;
 import logoparsing.grammar.LogoParser.ReContext;
 import logoparsing.grammar.LogoParser.RepeatContext;
 import logoparsing.grammar.LogoParser.SetContext;
@@ -32,10 +35,9 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
 public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
-	Traceur mTraceur;
-	ParseTreeProperty<Integer> mAtts = new ParseTreeProperty<Integer>();
-	private Map<String, Integer> mVars = new HashMap<String, Integer>();
-	private int mLoop;
+	private Traceur mTraceur;
+	private ParseTreeProperty<Integer> mAtts = new ParseTreeProperty<Integer>();
+	private Context mContext = new Context();
 	
 	public LogoTreeVisitor() {
 		super();
@@ -86,7 +88,6 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		visitChildren(ctx);
 		int a = getValueFromTree(ctx.expr(0));
 		int b = getValueFromTree(ctx.expr(1));
-		System.out.println(ctx);
 		int res = a * b;
 		setAttValue(ctx, res);
 		return res;
@@ -212,9 +213,11 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	public Integer visitSet(SetContext ctx)
 	{
 		visitChildren(ctx);
+		
 		String var = ctx.DECLARATION_ID().getText().replace("\"", "");
 		int value = getValueFromTree(ctx.expr());
-		mVars.put(var, value);
+		mContext.setSymbolValue(var, value);
+
 		return 0;
 	}
 
@@ -230,18 +233,16 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	public Integer visitId(IdContext ctx) {
 		visitChildren(ctx);
 		String symbol = ctx.getText().replace(":", "");
-		if (! mVars.containsKey(symbol)) {
-			throw new RuntimeException("Undefined variable " + ctx.getText());
-		}
-		int res = mVars.get(symbol);
+		int res = mContext.getSymbolValue(symbol);
 		setAttValue(ctx, res);
 		return res;
 	}
 	
 	@Override
 	public Integer visitLoop(LoopContext ctx) {
-		setAttValue(ctx, mLoop);
-		return mLoop;
+		setAttValue(ctx, mContext.mLoop);
+		System.out.println(mContext.mLoop);
+		return mContext.mLoop;
 	}
 	
 	@Override
@@ -263,11 +264,15 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	public Integer visitRepeat(RepeatContext ctx) {
 		visit(ctx.expr());
 		int n = getAttValue(ctx.expr());
-	
+		
+		mContext = new Context(mContext);
+		
 		for (int i = 0; i < n; i++) {
-			mLoop = i;
+			mContext.mLoop = i;
 			visit(ctx.liste_instructions());
 		}
+		
+		mContext = mContext.getUpperContext();
 		
 		return n;
 	}
@@ -285,6 +290,63 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		return 0;
 	}
 
+	@Override
+	public Integer visitFunction(FunctionContext ctx) {
+		
+		Function f = mContext.getFunction(ctx.FUNCTION_ID().getText());
+		if (f.arguments.size() != ctx.expr().size()) {
+			throw new RuntimeException("Wrong arity (given " + f.arguments.size() + " expected " + ctx.expr().size());
+		}
+
+		mContext = new Context(mContext);
+		
+		List<Integer> values = new ArrayList<Integer>();
+		for (ExprContext expr : ctx.expr()) {
+			visit(expr);
+			values.add(getAttValue(expr));
+		}		
+		mContext.addArguments(f, values);		
+		
+		visit(f.ctx.programme());
+		visit(f.ctx.expr());
+		int returnValue = f.ctx.expr() == null ? 0 : getAttValue(f.ctx.expr());
+		setAttValue(ctx, returnValue);
+		
+		mContext = mContext.getUpperContext();		
+		return returnValue;
+	}
+	
+	@Override
+	public Integer visitProcedure(ProcedureContext ctx) {
+		Function f = mContext.getFunction(ctx.FUNCTION_ID().getText());
+		if (f.arguments.size() != ctx.expr().size()) {
+			throw new RuntimeException("Wrong arity (given " + f.arguments.size() + " expected " + ctx.expr().size());
+		}
+
+		mContext = new Context(mContext);
+		
+		List<Integer> values = new ArrayList<Integer>();
+		for (ExprContext expr : ctx.expr()) {
+			visit(expr);
+			values.add(getAttValue(expr));
+		}		
+		mContext.addArguments(f, values);		
+		
+		visit(f.ctx.programme());
+		visit(f.ctx.expr());
+		int returnValue = f.ctx.expr() == null ? 0 : getAttValue(f.ctx.expr());
+		setAttValue(ctx, returnValue);
+		
+		mContext = mContext.getUpperContext();		
+		return returnValue;
+	}
+	
+	@Override
+	public Integer visitFunctionDeclaration(FunctionDeclarationContext ctx) {
+		mContext.addFunction(ctx);
+		return 0;		
+	}
+	
 }
 
 
