@@ -15,9 +15,11 @@ import logoparsing.grammar.LogoParser.IdContext;
 import logoparsing.grammar.LogoParser.IfContext;
 import logoparsing.grammar.LogoParser.IntContext;
 import logoparsing.grammar.LogoParser.LcContext;
+import logoparsing.grammar.LogoParser.LoopContext;
 import logoparsing.grammar.LogoParser.MultContext;
 import logoparsing.grammar.LogoParser.ParContext;
 import logoparsing.grammar.LogoParser.ReContext;
+import logoparsing.grammar.LogoParser.RepeatContext;
 import logoparsing.grammar.LogoParser.SetContext;
 import logoparsing.grammar.LogoParser.SubContext;
 import logoparsing.grammar.LogoParser.TdContext;
@@ -29,22 +31,23 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
 public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
-	Traceur traceur;
-	ParseTreeProperty<Integer> atts = new ParseTreeProperty<Integer>();
-	private Map<String, Integer> m_vars = new HashMap<String, Integer>();
+	Traceur mTraceur;
+	ParseTreeProperty<Integer> mAtts = new ParseTreeProperty<Integer>();
+	private Map<String, Integer> mVars = new HashMap<String, Integer>();
+	private int mLoop;
 	
 	public LogoTreeVisitor() {
 		super();
 	}
 	public void initialize(java.awt.Graphics g) {
-	      traceur = new Traceur();
-	      traceur.setGraphics(g);
+	      mTraceur = new Traceur();
+	      mTraceur.setGraphics(g);
     }
 	public void setAttValue(ParseTree node, int value) { 
-		atts.put(node, value);
+		mAtts.put(node, value);
 	}
 
-	public Integer getAttValue(ParseTree node) { return atts.get(node); }	
+	public Integer getAttValue(ParseTree node) { return mAtts.get(node); }	
 
 	private int getValueFromTree(ExprContext ctx) {
 		return getAttValue(ctx);
@@ -53,30 +56,28 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	@Override
 	public Integer visitAv(AvContext ctx) {
 		visitChildren(ctx);
-		String intText = ctx.getText(); 
-		traceur.avance(getAttValue(ctx.expr()));
+		mTraceur.avance(getAttValue(ctx.expr()));
 		return 0;
 	}
 
 	@Override
 	public Integer visitRe(ReContext ctx) {
 		visitChildren(ctx);
-		String intText = ctx.getText(); 
-		traceur.recule(getAttValue(ctx.expr()));
+		mTraceur.recule(getAttValue(ctx.expr()));
 		return 0;
 	}	
 	
 	@Override
 	public Integer visitTg(TgContext ctx) {
 		visitChildren(ctx);
-		traceur.tg(getAttValue(ctx.expr()));		
+		mTraceur.tg(getAttValue(ctx.expr()));		
 		return 0;
 	}
 	
 	@Override
 	public Integer visitTd(TdContext ctx) {
 		visitChildren(ctx);
-		traceur.td(getAttValue(ctx.expr()));
+		mTraceur.td(getAttValue(ctx.expr()));
 		return 0;
 	}
 	@Override
@@ -129,22 +130,22 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	@Override
 	public Integer visitLc(LcContext ctx) {
 		visitChildren(ctx);		
-		traceur.setDrawing(false);
+		mTraceur.setDrawing(false);
 		return 0;
 	}
 
 	@Override
 	public Integer visitBc(BcContext ctx) {
 		visitChildren(ctx);		
-		traceur.setDrawing(true);
+		mTraceur.setDrawing(true);
 		return 0;
 	}
 	
 	@Override
 	public Integer visitVe(VeContext ctx) {
 		visitChildren(ctx);
-		traceur.clear();
-		traceur.setPos(300, 300);
+		mTraceur.clear();
+		mTraceur.setPos(300, 300);
 		return 0;
 	}
 
@@ -153,7 +154,7 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		visitChildren(ctx);
 		int a = getValueFromTree(ctx.expr(0));
 		int b = getValueFromTree(ctx.expr(1));
-		traceur.setPos(a, b);
+		mTraceur.setPos(a, b);
 		return 0;
 	}	
 	
@@ -202,7 +203,7 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	public Integer visitFcc(FccContext ctx) {
 		visitChildren(ctx);
 		int n = getValueFromTree(ctx.expr());		
-		traceur.setColor(n);
+		mTraceur.setColor(n);
 		return 0;
 	}
 	
@@ -212,7 +213,7 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 		visitChildren(ctx);
 		String var = ctx.DECLARATION_ID().getText().replace("\"", "");
 		int value = getValueFromTree(ctx.expr());
-		m_vars.put(var, value);
+		mVars.put(var, value);
 		return 0;
 	}
 
@@ -228,12 +229,18 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 	public Integer visitId(IdContext ctx) {
 		visitChildren(ctx);
 		String symbol = ctx.getText().replace(":", "");
-		if (! m_vars.containsKey(symbol)) {
+		if (! mVars.containsKey(symbol)) {
 			throw new RuntimeException("Undefined variable " + ctx.getText());
 		}
-		int res = m_vars.get(symbol);
+		int res = mVars.get(symbol);
 		setAttValue(ctx, res);
 		return res;
+	}
+	
+	@Override
+	public Integer visitLoop(LoopContext ctx) {
+		setAttValue(ctx, mLoop);
+		return mLoop;
 	}
 	
 	@Override
@@ -249,6 +256,19 @@ public class LogoTreeVisitor extends LogoBaseVisitor<Integer> {
 			}
 		}
 		return 0;
+	}
+	
+	@Override
+	public Integer visitRepeat(RepeatContext ctx) {
+		visit(ctx.expr());
+		int n = getAttValue(ctx.expr());
+	
+		for (int i = 0; i < n; i++) {
+			mLoop = i;
+			visit(ctx.liste_instructions());
+		}
+		
+		return n;
 	}
 	
 

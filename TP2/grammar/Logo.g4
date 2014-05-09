@@ -28,7 +28,8 @@ expr:
   | '(' expr ')' # par
   | INT # int
   | ID  # id
- ;
+  | 'loop' # loop
+;
  
 instruction :
     'av' expr # av
@@ -42,4 +43,6 @@ instruction :
   | 've' # ve
   | 'set' DECLARATION_ID expr # set
   | 'if' expr '[' liste_instructions ']' ('[' liste_instructions ']')? # if
+  | 'repeat' expr '[' liste_instructions ']' # repeat
+  | 'while' expr '[' liste_instructions ']' # while
 ;
