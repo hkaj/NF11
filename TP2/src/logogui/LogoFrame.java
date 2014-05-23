@@ -22,7 +22,7 @@ import javax.swing.event.ChangeListener;
 import logoparsing.grammar.LogoLexer;
 import logoparsing.grammar.LogoParser;
 import logoparsing.grammar.LogoParser.ProgrammeContext;
-import logoparsing.grammar.LogoTreeVisitor;
+import logoparsing.grammar.LogoExecutionTreeVisitor;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -346,11 +346,12 @@ public class LogoFrame extends JFrame {
 				scaleSlider.setValue(sliderValue);
 				getJScrollASTPane().setViewportView(viewer);
 
-				LogoTreeVisitor visitor = new LogoTreeVisitor();
+				LogoExecutionTreeVisitor visitor = new LogoExecutionTreeVisitor();
 				visitor.initialize(getJLogoPane().getGraphics());
 				visitor.visit(tree);
 
 			} catch (Exception ex) {
+				Log.appendnl(ex.getMessage());				
 				ex.printStackTrace();
 			}
 		} else {
