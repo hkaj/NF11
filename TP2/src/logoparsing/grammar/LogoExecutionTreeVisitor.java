@@ -231,38 +231,7 @@ public class LogoExecutionTreeVisitor extends LogoTreeVisitor {
 			}
 		}
 		return 0;
-	}
-	
-	@Override
-	public Integer visitRepeat(RepeatContext ctx) {
-		visit(ctx.expr());
-		int n = getAttValue(ctx.expr());
-		
-		mContext = new Context(mContext);
-		
-		for (int i = 0; i < n; i++) {
-			mContext.mLoop = i;
-			visit(ctx.liste_instructions());
-		}
-		
-		mContext = mContext.getUpperContext();
-		
-		return n;
-	}
-	
-	@Override
-	public Integer visitWhile(WhileContext ctx) {
-		visit(ctx.expr());
-		int n = getAttValue(ctx.expr());
-		
-		while (n != 0) {
-			visit(ctx.liste_instructions());			
-			visit(ctx.expr());
-			n = getAttValue(ctx.expr());			
-		}
-		return 0;
-	}
-	
+	}	
 }
 
 

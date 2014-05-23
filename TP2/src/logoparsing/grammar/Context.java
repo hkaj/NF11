@@ -48,6 +48,9 @@ public class Context {
 	}
 	
 	public void setSymbolValue(String name, Integer value) {
+		if (mSymbols.isAParameter(name)) {
+			throw new RuntimeException("Variable " + name + " is a parameter and can't be used as a variable");
+		}
 		mSymbols.set(name,  value);
 	}
 	
@@ -58,7 +61,7 @@ public class Context {
 	
 	public void addArguments(Function f, List<Integer> values) {
 		for (int i = 0; i < values.size(); i++) {
-			mSymbols.set(f.arguments.get(i), values.get(i));
+			mSymbols.setParameter(f.arguments.get(i), values.get(i));
 		}
 	}
 	

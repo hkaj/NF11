@@ -21,6 +21,7 @@ import javax.swing.event.ChangeListener;
 
 import logoparsing.grammar.LogoLexer;
 import logoparsing.grammar.LogoParser;
+import logoparsing.grammar.LogoSemanticVisitor;
 import logoparsing.grammar.LogoParser.ProgrammeContext;
 import logoparsing.grammar.LogoExecutionTreeVisitor;
 
@@ -345,6 +346,9 @@ public class LogoFrame extends JFrame {
 				int sliderValue = (int) ((viewer.getScale() - 1.0) * 1000);
 				scaleSlider.setValue(sliderValue);
 				getJScrollASTPane().setViewportView(viewer);
+
+				LogoSemanticVisitor semanticVisitor = new LogoSemanticVisitor();
+				semanticVisitor.visit(tree);
 
 				LogoExecutionTreeVisitor visitor = new LogoExecutionTreeVisitor();
 				visitor.initialize(getJLogoPane().getGraphics());
