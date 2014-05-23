@@ -1,0 +1,33 @@
+function koch("D) [
+  if :D > 0 [
+    koch(:D - 1)
+    td 60
+    koch(:D - 1)
+    tg 120
+    koch(:D - 1)
+    td 60
+    koch(:D - 1)
+  ]
+  if :D == 0 [
+    av :LEN
+  ]
+]
+
+function kochcomplete("D) [
+  repeat 3 [
+    koch(:D)
+    tg 120
+  ]
+]
+
+lc
+td 90
+av 90
+bc
+
+set "D 4
+set "LEN 4
+
+kochcomplete(:D)
+
+
