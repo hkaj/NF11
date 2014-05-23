@@ -8,7 +8,7 @@ import logoparsing.grammar.LogoParser.ExprContext;
 import logoparsing.grammar.LogoParser.FunctionDeclarationContext;
 
 public class Context {
-	private Context mUpperContext;
+	private Context mUpperContext = null;
 	
 	private Map<String,Function> mFunctions = new HashMap<String, Function>();
 	private Symbols mSymbols = new Symbols();

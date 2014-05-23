@@ -34,9 +34,18 @@ public class LogoExecutionTreeVisitor extends LogoTreeVisitor {
 	      mTraceur = new Traceur();
 	      mTraceur.setGraphics(g);
     }
-	private int getValueFromTree(ExprContext ctx) {
-		return getAttValue(ctx);
-	}
+	
+	@Override
+	public Integer visitSet(SetContext ctx)
+	{
+		visitChildren(ctx);
+		
+		String var = ctx.DECLARATION_ID().getText().replace("\"", "");
+		int value = getValueFromTree(ctx.expr());
+		mContext.setSymbolValue(var, value);
+
+		return 0;
+	}		
 	
 	@Override
 	public Integer visitAv(AvContext ctx) {
@@ -64,51 +73,6 @@ public class LogoExecutionTreeVisitor extends LogoTreeVisitor {
 		visitChildren(ctx);
 		mTraceur.td(getAttValue(ctx.expr()));
 		return 0;
-	}
-	@Override
-	public Integer visitMult(MultContext ctx) {
-		visitChildren(ctx);
-		int a = getValueFromTree(ctx.expr(0));
-		int b = getValueFromTree(ctx.expr(1));
-		int res = a * b;
-		setAttValue(ctx, res);
-		return res;
-	}
-
-	@Override
-	public Integer visitDiv(DivContext ctx) {
-		visitChildren(ctx);
-		int a = getValueFromTree(ctx.expr(0));
-		int b = getValueFromTree(ctx.expr(1));
-		int res = a / b;
-		setAttValue(ctx, res);
-		return res;
-	}
-	@Override
-	public Integer visitAdd(AddContext ctx) {
-		visitChildren(ctx);
-		int a = getValueFromTree(ctx.expr(0));
-		int b = getValueFromTree(ctx.expr(1));
-		int res = a + b;
-		setAttValue(ctx, res);
-		return res;
-	}
-	@Override
-	public Integer visitSub(SubContext ctx) {
-		visitChildren(ctx);
-		int a = getValueFromTree(ctx.expr(0));
-		int b = getValueFromTree(ctx.expr(1));
-		int res = a - b;
-		setAttValue(ctx, res);
-		return res;
-	}
-	
-	@Override
-	public Integer visitPar(ParContext ctx) {
-		visitChildren(ctx);
-		int res = getAttValue(ctx.expr());
-		setAttValue(ctx, res);
-		return res;
 	}
 	
 	@Override
@@ -142,45 +106,6 @@ public class LogoExecutionTreeVisitor extends LogoTreeVisitor {
 		return 0;
 	}	
 	
-	@Override
-	public Integer visitEqual(@NotNull LogoParser.EqualContext ctx) {
-		visitChildren(ctx);
-		int a = getValueFromTree(ctx.expr(0));
-		int b = getValueFromTree(ctx.expr(1));
-		int val = (a == b) ? 1 : 0;
-		setAttValue(ctx, val);		
-		return val;
-	}
-	
-	@Override
-	public Integer visitNequal(@NotNull LogoParser.NequalContext ctx) {
-		visitChildren(ctx);
-		int a = getValueFromTree(ctx.expr(0));
-		int b = getValueFromTree(ctx.expr(1));
-		int val = (a != b) ? 1 : 0;
-		setAttValue(ctx, val);		
-		return val;
-	}
-	
-	@Override
-	public Integer visitInf(@NotNull LogoParser.InfContext ctx) {
-		visitChildren(ctx);
-		int a = getValueFromTree(ctx.expr(0));
-		int b = getValueFromTree(ctx.expr(1));
-		int val = (a < b) ? 1 : 0;
-		setAttValue(ctx, val);		
-		return val;
-	}
-
-	@Override
-	public Integer visitSup(@NotNull LogoParser.SupContext ctx) {
-		visitChildren(ctx);
-		int a = getValueFromTree(ctx.expr(0));
-		int b = getValueFromTree(ctx.expr(1));
-		int val = (a > b) ? 1 : 0;
-		setAttValue(ctx, val);		
-		return val;
-	}
 	
 	
 	@Override
@@ -188,48 +113,6 @@ public class LogoExecutionTreeVisitor extends LogoTreeVisitor {
 		visitChildren(ctx);
 		int n = getValueFromTree(ctx.expr());		
 		mTraceur.setColor(n);
-		return 0;
-	}
-	
-	@Override
-	public Integer visitSet(SetContext ctx)
-	{
-		visitChildren(ctx);
-		
-		String var = ctx.DECLARATION_ID().getText().replace("\"", "");
-		int value = getValueFromTree(ctx.expr());
-		mContext.setSymbolValue(var, value);
-
-		return 0;
-	}
-
-	@Override
-	public Integer visitInt(IntContext ctx) {
-		visitChildren(ctx);
-		int res = Integer.parseInt(ctx.getText());
-		setAttValue(ctx, res);
-		return res;
-	}
-	
-	@Override
-	public Integer visitLoop(LoopContext ctx) {
-		setAttValue(ctx, mContext.mLoop);
-		System.out.println(mContext.mLoop);
-		return mContext.mLoop;
-	}
-	
-	@Override
-	public Integer visitIf(IfContext ctx) {
-		visit(ctx.expr());
-		int res = getAttValue(ctx.expr());
-		if (res == 1) {
-			visit(ctx.liste_instructions(0));
-		}
-		else {
-			if (ctx.liste_instructions().size() == 2) {
-				visit(ctx.liste_instructions(1));
-			}
-		}
 		return 0;
 	}	
 }

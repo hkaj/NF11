@@ -10,7 +10,7 @@ public class LogoSemanticVisitor extends LogoTreeVisitor {
 	public Integer visitId(IdContext ctx) {
 		return super.visitId(ctx);
 	}
-
+	
 	@Override
 	public Integer visitFunction(FunctionContext ctx) {
 		Function f = mContext.getFunction(ctx.FUNCTION_ID().getText());
