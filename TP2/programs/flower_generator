@@ -1,0 +1,13 @@
+set "C 1
+repeat 8 [
+    td 45
+    repeat 5 [
+        set "C :C * 250
+        fcc :C
+        repeat 90 [
+            av 2
+            td 2
+        ]
+        td 90
+    ]
+]

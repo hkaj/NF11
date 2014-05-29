@@ -1,0 +1,22 @@
+function koch("D) [
+  if :D > 0 [
+    koch(:D - 1)
+    td 60
+    koch(:D - 1)
+    tg 120
+    koch(:D - 1)
+    td 60
+    koch(:D - 1)
+  ]
+  if :D == 0 [
+    av :LEN
+  ]
+]
+set "D 4
+set "LEN 2
+
+koch()
+tg 120
+koch()
+tg 120
+koch()

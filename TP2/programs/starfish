@@ -1,0 +1,8 @@
+set "mLoop 0
+repeat 1800 [
+    set "mLoop :mLoop + 1
+    td 10
+    av 10
+    tg :mLoop * 5
+    td 1
+]
